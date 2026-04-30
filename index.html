@@ -10,26 +10,26 @@
   <style>
     :root {
       --bg: #061014;
-      --card: rgba(255, 255, 255, 0.075);
-      --card2: rgba(255, 255, 255, 0.12);
       --text: #f8fafc;
       --muted: #b8c6d1;
       --green: #39e17a;
       --green2: #0f9f56;
       --blue: #62c7ff;
       --line: rgba(255, 255, 255, 0.16);
-      --danger: #ff6b6b;
       --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
     }
 
-    * { box-sizing: border-box; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 75% 18%, rgba(57, 225, 122, 0.28), transparent 34%),
+        radial-gradient(circle at 75% 18%, rgba(57, 225, 122, 0.26), transparent 34%),
         radial-gradient(circle at 18% 18%, rgba(98, 199, 255, 0.12), transparent 31%),
         linear-gradient(135deg, #061014 0%, #0b171b 45%, #04110a 100%);
       min-height: 100vh;
@@ -118,7 +118,9 @@
       font-size: 14px;
     }
 
-    nav a:hover { color: white; }
+    nav a:hover {
+      color: white;
+    }
 
     .nav-cta {
       color: #031107;
@@ -218,7 +220,9 @@
       border-color: var(--line);
     }
 
-    .btn-full { width: 100%; }
+    .btn-full {
+      width: 100%;
+    }
 
     .proof {
       display: grid;
@@ -248,14 +252,16 @@
 
     .visual {
       position: relative;
-      min-height: 530px;
+      min-height: 560px;
+      overflow: visible;
     }
 
     .house-card {
       position: absolute;
-      inset: 16px 0 auto auto;
-      width: min(530px, 100%);
-      min-height: 420px;
+      top: 20px;
+      right: 0;
+      width: min(520px, 100%);
+      min-height: 390px;
       border: 1px solid var(--line);
       border-radius: 36px;
       background:
@@ -291,21 +297,22 @@
     }
 
     .chart-house {
-      width: 100%;
-      height: 245px;
-      margin-top: 32px;
+      width: 82%;
+      height: 210px;
+      margin: 36px auto 0;
+      display: block;
       position: relative;
       z-index: 1;
     }
 
     .mini-dashboard {
       position: absolute;
-      left: -10px;
-      bottom: 34px;
-      width: 340px;
+      left: 18px;
+      bottom: 18px;
+      width: 335px;
       border: 1px solid var(--line);
       border-radius: 25px;
-      background: rgba(7,16,20,.84);
+      background: rgba(7,16,20,.92);
       box-shadow: var(--shadow);
       padding: 20px;
       backdrop-filter: blur(22px);
@@ -338,8 +345,13 @@
       font-size: 14px;
     }
 
-    .dash-row strong { color: white; }
-    .positive { color: #8cffb3 !important; }
+    .dash-row strong {
+      color: white;
+    }
+
+    .positive {
+      color: #8cffb3 !important;
+    }
 
     section {
       padding: 58px 0;
@@ -393,7 +405,8 @@
       font-size: 21px;
     }
 
-    .card p, .card li {
+    .card p,
+    .card li {
       color: var(--muted);
       font-size: 15px;
       line-height: 1.5;
@@ -450,7 +463,9 @@
       font-size: 13px;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 15px 16px;
       border-radius: 15px;
@@ -461,12 +476,17 @@
       font: inherit;
     }
 
-    input:focus, textarea:focus, select:focus {
+    input:focus,
+    textarea:focus,
+    select:focus {
       border-color: rgba(57,225,122,.65);
       box-shadow: 0 0 0 4px rgba(57,225,122,.10);
     }
 
-    input::placeholder, textarea::placeholder { color: #81909d; }
+    input::placeholder,
+    textarea::placeholder {
+      color: #81909d;
+    }
 
     textarea {
       min-height: 115px;
@@ -486,7 +506,9 @@
       margin: 12px 0 0;
     }
 
-    .fine a { color: #8cffb3; }
+    .fine a {
+      color: #8cffb3;
+    }
 
     .status {
       display: none;
@@ -559,14 +581,49 @@
     }
 
     @media (max-width: 920px) {
-      .hero, .contact { grid-template-columns: 1fr; }
-      .visual { min-height: 470px; }
-      .grid3, .proof { grid-template-columns: 1fr; }
-      nav { display: none; }
-      .mini-dashboard { left: 12px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .floating-bar { display: flex; }
-      body { padding-bottom: 86px; }
+      .hero,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .visual {
+        min-height: 520px;
+      }
+
+      .grid3,
+      .proof {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .house-card {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: min(520px, 100%);
+      }
+
+      .mini-dashboard {
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(335px, calc(100% - 24px));
+        bottom: 8px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-bar {
+        display: flex;
+      }
+
+      body {
+        padding-bottom: 86px;
+      }
     }
   </style>
 </head>
@@ -607,6 +664,7 @@
       <section class="hero">
         <div>
           <div class="eyebrow"><span class="dot"></span> Mortgage marketing intelligence</div>
+
           <h1>Turn marketing spend into <span class="gradient-text">funded loans.</span></h1>
 
           <p class="lead">
@@ -644,7 +702,7 @@
 
           <div class="mini-dashboard">
             <div class="dash-head">
-              <span>Live sample output</span>
+              <span>Sample output</span>
               <span class="live-pill">Insight-ready</span>
             </div>
             <div class="dash-row"><span>Lead volume</span><strong>+18.4%</strong></div>
@@ -725,8 +783,7 @@
           <div>
             <h2 class="section-title">Get a free sample analysis.</h2>
             <p class="section-sub">
-              Send your contact information or book directly. Your booking link should use Google Calendar Appointment Schedule
-              so appointments automatically block your availability and create a Google Meet invite.
+              Send your contact information or book directly. Once the calendar link is connected, appointments will block availability and create a Google Meet invite.
             </p>
 
             <div class="contact-options">
@@ -735,8 +792,7 @@
             </div>
 
             <p class="fine">
-              Availability target: Monday–Friday, 9 AM–6 PM Pacific. Once you create your Google Calendar appointment schedule,
-              Google will automatically remove booked times.
+              Availability target: Monday–Friday, 9 AM–6 PM Pacific.
             </p>
           </div>
 
@@ -785,8 +841,7 @@
               <div id="formStatus" class="status"></div>
 
               <p class="fine">
-                This form works instantly with your email app as a free fallback. For true background submissions, replace
-                <strong>TALLY_FORM_LINK</strong> with your Tally form URL.
+                This form currently opens the visitor’s email app. After your inbox is ready, connect Tally for background form submissions.
               </p>
             </form>
           </div>
@@ -815,6 +870,7 @@
         alert("Booking is not connected yet. Create your Google Calendar Appointment Schedule, then replace BOOKING_LINK in the index.html file.");
         return false;
       }
+
       window.open(BOOKING_LINK, "_blank", "noopener,noreferrer");
       return false;
     }
@@ -824,6 +880,7 @@
         window.open(TALLY_FORM_LINK, "_blank", "noopener,noreferrer");
         return false;
       }
+
       document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
       return false;
     }
@@ -857,6 +914,7 @@
       e.preventDefault();
 
       const status = document.querySelector("#formStatus");
+
       const data = {
         name: document.querySelector("#name").value.trim(),
         company: document.querySelector("#company").value.trim(),
@@ -881,6 +939,7 @@
 
       const subject = encodeURIComponent("LenderLens Free Analysis Request - " + (data.company || data.name));
       const body = encodeURIComponent(buildEmailBody(data));
+
       window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
 
       status.className = "status good";
