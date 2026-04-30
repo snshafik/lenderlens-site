@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>LenderLens Analytics | Mortgage Marketing Intelligence</title>
   <meta name="description" content="LenderLens Analytics helps mortgage lenders turn marketing spend, CRM data, and lead sources into funded-loan intelligence." />
 
   <style>
     :root {
-      --bg: #071014;
-      --panel: rgba(255,255,255,0.08);
-      --panel2: rgba(255,255,255,0.12);
+      --bg: #061014;
+      --card: rgba(255, 255, 255, 0.075);
+      --card2: rgba(255, 255, 255, 0.12);
       --text: #f8fafc;
-      --muted: #b7c4cf;
-      --green: #38d973;
-      --green2: #0f8f49;
-      --blue: #4db8ff;
-      --line: rgba(255,255,255,0.16);
-      --shadow: 0 24px 80px rgba(0,0,0,0.45);
+      --muted: #b8c6d1;
+      --green: #39e17a;
+      --green2: #0f9f56;
+      --blue: #62c7ff;
+      --line: rgba(255, 255, 255, 0.16);
+      --danger: #ff6b6b;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 78% 22%, rgba(56,217,115,.28), transparent 33%),
-        radial-gradient(circle at 12% 18%, rgba(77,184,255,.14), transparent 28%),
-        linear-gradient(135deg, #061015 0%, #0c1718 48%, #051009 100%);
+        radial-gradient(circle at 75% 18%, rgba(57, 225, 122, 0.28), transparent 34%),
+        radial-gradient(circle at 18% 18%, rgba(98, 199, 255, 0.12), transparent 31%),
+        linear-gradient(135deg, #061014 0%, #0b171b 45%, #04110a 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    body:before {
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
@@ -44,6 +46,16 @@
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: linear-gradient(to bottom, black, transparent 85%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.42) 100%);
+      z-index: 0;
     }
 
     .wrap {
@@ -57,69 +69,82 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 28px 0;
+      padding: 26px 0;
     }
 
     .brand {
       display: flex;
-      gap: 14px;
       align-items: center;
-      text-decoration: none;
+      gap: 14px;
       color: white;
+      text-decoration: none;
     }
 
-    .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: linear-gradient(145deg, rgba(56,217,115,.22), rgba(77,184,255,.10));
+    .logo-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(57,225,122,.24), rgba(98,199,255,.10));
       border: 1px solid var(--line);
       display: grid;
       place-items: center;
-      box-shadow: 0 0 40px rgba(56,217,115,.18);
+      box-shadow: 0 0 42px rgba(57,225,122,.20);
     }
 
     .brand strong {
+      font-size: 23px;
+      letter-spacing: -0.045em;
       display: block;
-      font-size: 22px;
-      letter-spacing: -0.04em;
     }
 
     .brand span {
-      display: block;
       color: var(--muted);
       font-size: 12px;
-      letter-spacing: .22em;
+      letter-spacing: .23em;
       text-transform: uppercase;
+      display: block;
       margin-top: -3px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
     }
 
     nav a {
       color: var(--muted);
       text-decoration: none;
-      margin-left: 24px;
       font-size: 14px;
     }
 
     nav a:hover { color: white; }
 
+    .nav-cta {
+      color: #031107;
+      background: linear-gradient(135deg, #8cffb3, var(--green));
+      padding: 11px 15px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
     .hero {
       display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 48px;
+      gap: 50px;
       align-items: center;
-      padding: 58px 0 54px;
+      padding: 56px 0 44px;
     }
 
     .eyebrow {
       display: inline-flex;
-      gap: 8px;
       align-items: center;
-      padding: 8px 12px;
+      gap: 9px;
       border: 1px solid var(--line);
+      background: rgba(57,225,122,.10);
+      color: #e5fff0;
       border-radius: 999px;
-      color: #dfffee;
-      background: rgba(56,217,115,.10);
+      padding: 8px 13px;
       font-size: 13px;
       margin-bottom: 22px;
     }
@@ -127,20 +152,20 @@
     .dot {
       width: 8px;
       height: 8px;
-      border-radius: 50%;
       background: var(--green);
+      border-radius: 50%;
       box-shadow: 0 0 18px var(--green);
     }
 
     h1 {
-      font-size: clamp(42px, 6vw, 76px);
+      font-size: clamp(43px, 6vw, 78px);
       line-height: .94;
-      letter-spacing: -0.07em;
+      letter-spacing: -0.075em;
       margin: 0 0 24px;
     }
 
     .gradient-text {
-      background: linear-gradient(90deg, #fff, #b8ffd2 55%, #7dc9ff);
+      background: linear-gradient(90deg, #fff, #b8ffd2 52%, #8cd8ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -151,13 +176,13 @@
       font-size: 20px;
       line-height: 1.55;
       max-width: 660px;
-      margin-bottom: 30px;
+      margin: 0 0 30px;
     }
 
     .actions {
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 14px;
       align-items: center;
       margin-bottom: 34px;
     }
@@ -166,45 +191,53 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 9px;
       padding: 15px 20px;
-      border-radius: 14px;
-      font-weight: 800;
-      text-decoration: none;
+      border-radius: 15px;
       border: 1px solid transparent;
-      cursor: pointer;
       font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-primary {
-      color: #031107;
-      background: linear-gradient(135deg, #7dffa6, var(--green));
-      box-shadow: 0 18px 45px rgba(56,217,115,.22);
+      color: #021006;
+      background: linear-gradient(135deg, #8cffb3, var(--green));
+      box-shadow: 0 20px 50px rgba(57,225,122,.25);
     }
 
     .btn-secondary {
       color: white;
+      background: rgba(255,255,255,.07);
       border-color: var(--line);
-      background: rgba(255,255,255,.06);
     }
+
+    .btn-full { width: 100%; }
 
     .proof {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      max-width: 720px;
+      max-width: 730px;
     }
 
     .proof-card {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.055);
       padding: 16px;
-      border-radius: 18px;
+      border-radius: 19px;
       backdrop-filter: blur(14px);
     }
 
     .proof-card strong {
       display: block;
-      font-size: 22px;
+      font-size: 20px;
       color: white;
     }
 
@@ -220,47 +253,80 @@
 
     .house-card {
       position: absolute;
-      inset: 20px 0 auto auto;
-      width: min(520px, 100%);
-      min-height: 410px;
+      inset: 16px 0 auto auto;
+      width: min(530px, 100%);
+      min-height: 420px;
       border: 1px solid var(--line);
-      border-radius: 34px;
+      border-radius: 36px;
       background:
-        linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.04)),
-        radial-gradient(circle at 70% 35%, rgba(56,217,115,.26), transparent 34%);
+        linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.045)),
+        radial-gradient(circle at 68% 32%, rgba(57,225,122,.28), transparent 35%);
       box-shadow: var(--shadow);
       overflow: hidden;
       padding: 34px;
       backdrop-filter: blur(20px);
     }
 
-    .house-card:after {
+    .house-card::after {
       content: "";
       position: absolute;
-      inset: auto -80px -120px auto;
-      width: 330px;
-      height: 330px;
-      background: rgba(56,217,115,.20);
-      filter: blur(70px);
+      right: -70px;
+      bottom: -125px;
+      width: 340px;
+      height: 340px;
+      background: rgba(57,225,122,.20);
+      filter: blur(75px);
+    }
+
+    .house-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .house-card h2 {
+      font-size: 34px;
+      margin: 8px 0 0;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
     }
 
     .chart-house {
       width: 100%;
       height: 245px;
-      margin-top: 30px;
+      margin-top: 32px;
+      position: relative;
+      z-index: 1;
     }
 
     .mini-dashboard {
       position: absolute;
-      left: -12px;
-      bottom: 36px;
-      width: 330px;
+      left: -10px;
+      bottom: 34px;
+      width: 340px;
       border: 1px solid var(--line);
-      border-radius: 24px;
-      background: rgba(7,16,20,.82);
+      border-radius: 25px;
+      background: rgba(7,16,20,.84);
       box-shadow: var(--shadow);
       padding: 20px;
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(22px);
+    }
+
+    .dash-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-weight: 850;
+      margin-bottom: 6px;
+    }
+
+    .live-pill {
+      color: #c9ffdb;
+      font-size: 12px;
+      background: rgba(57,225,122,.12);
+      border: 1px solid rgba(57,225,122,.28);
+      border-radius: 999px;
+      padding: 5px 8px;
     }
 
     .dash-row {
@@ -273,16 +339,16 @@
     }
 
     .dash-row strong { color: white; }
+    .positive { color: #8cffb3 !important; }
 
-    .positive { color: #7dffa6 !important; }
-
-    .section {
-      padding: 60px 0;
+    section {
+      padding: 58px 0;
     }
 
     .section-title {
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: -0.055em;
+      font-size: clamp(30px, 4vw, 49px);
+      letter-spacing: -0.06em;
+      line-height: 1.02;
       margin: 0 0 14px;
     }
 
@@ -291,6 +357,7 @@
       max-width: 760px;
       font-size: 18px;
       margin: 0 0 30px;
+      line-height: 1.55;
     }
 
     .grid3 {
@@ -302,21 +369,23 @@
     .card {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.065);
-      border-radius: 24px;
+      border-radius: 25px;
       padding: 26px;
       min-height: 220px;
       backdrop-filter: blur(14px);
+      box-shadow: 0 14px 50px rgba(0,0,0,.20);
     }
 
     .icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
+      width: 47px;
+      height: 47px;
+      border-radius: 15px;
       display: grid;
       place-items: center;
-      background: rgba(56,217,115,.13);
-      border: 1px solid rgba(56,217,115,.25);
+      background: rgba(57,225,122,.13);
+      border: 1px solid rgba(57,225,122,.25);
       margin-bottom: 18px;
+      font-size: 22px;
     }
 
     .card h3 {
@@ -327,6 +396,7 @@
     .card p, .card li {
       color: var(--muted);
       font-size: 15px;
+      line-height: 1.5;
     }
 
     .card ul {
@@ -334,19 +404,39 @@
       margin: 12px 0 0;
     }
 
+    .tier-featured {
+      border-color: rgba(57,225,122,.48);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(57,225,122,.16), transparent 30%),
+        rgba(255,255,255,.075);
+    }
+
     .contact {
       display: grid;
-      grid-template-columns: .95fr 1.05fr;
+      grid-template-columns: .92fr 1.08fr;
       gap: 28px;
       align-items: start;
       border: 1px solid var(--line);
-      border-radius: 32px;
+      border-radius: 34px;
       padding: 34px;
       background:
-        radial-gradient(circle at 10% 0%, rgba(56,217,115,.22), transparent 28%),
+        radial-gradient(circle at 10% 0%, rgba(57,225,122,.22), transparent 28%),
         rgba(255,255,255,.065);
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
+    }
+
+    .contact-options {
+      display: grid;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .form-card {
+      border: 1px solid var(--line);
+      background: rgba(3,10,13,.40);
+      border-radius: 24px;
+      padding: 22px;
     }
 
     form {
@@ -354,24 +444,70 @@
       gap: 12px;
     }
 
+    label {
+      color: #dbe7ee;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
     input, textarea, select {
       width: 100%;
       padding: 15px 16px;
-      border-radius: 14px;
+      border-radius: 15px;
       border: 1px solid var(--line);
-      background: rgba(4,9,12,.62);
+      background: rgba(4,9,12,.65);
       color: white;
       outline: none;
       font: inherit;
     }
 
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(57,225,122,.65);
+      box-shadow: 0 0 0 4px rgba(57,225,122,.10);
+    }
+
     input::placeholder, textarea::placeholder { color: #81909d; }
-    textarea { min-height: 118px; resize: vertical; }
+
+    textarea {
+      min-height: 115px;
+      resize: vertical;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
     .fine {
       color: #91a0aa;
       font-size: 13px;
-      margin-top: 10px;
+      line-height: 1.45;
+      margin: 12px 0 0;
+    }
+
+    .fine a { color: #8cffb3; }
+
+    .status {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    .status.good {
+      display: block;
+      color: #dfffea;
+      background: rgba(57,225,122,.12);
+      border: 1px solid rgba(57,225,122,.25);
+    }
+
+    .status.bad {
+      display: block;
+      color: #ffe0e0;
+      background: rgba(255,107,107,.12);
+      border: 1px solid rgba(255,107,107,.25);
     }
 
     footer {
@@ -385,26 +521,72 @@
       font-size: 14px;
     }
 
-    @media (max-width: 900px) {
+    .floating-bar {
+      display: none;
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 20;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(4, 10, 13, .86);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      gap: 10px;
+    }
+
+    .floating-bar a {
+      flex: 1;
+      padding: 13px 12px;
+      border-radius: 14px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .float-primary {
+      color: #031107;
+      background: linear-gradient(135deg, #8cffb3, var(--green));
+    }
+
+    .float-secondary {
+      color: white;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.07);
+    }
+
+    @media (max-width: 920px) {
       .hero, .contact { grid-template-columns: 1fr; }
       .visual { min-height: 470px; }
       .grid3, .proof { grid-template-columns: 1fr; }
       nav { display: none; }
       .mini-dashboard { left: 12px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .floating-bar { display: flex; }
+      body { padding-bottom: 86px; }
     }
   </style>
 </head>
 
 <body>
+  <script>
+    const TALLY_FORM_LINK = "https://tally.so/r/YOUR_FORM_ID";
+    const BOOKING_LINK = "https://calendar.google.com/calendar/appointments/schedules/YOUR_BOOKING_ID";
+    const CONTACT_EMAIL = "insights@lenderlens.net";
+  </script>
+
   <div class="wrap">
     <header>
       <a class="brand" href="#">
-        <div class="logo" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+        <div class="logo-box" aria-hidden="true">
+          <svg width="35" height="35" viewBox="0 0 64 64" fill="none">
             <path d="M8 31L32 12L56 31" stroke="#DFFFEA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M16 29V54H48V29" stroke="#DFFFEA" stroke-width="5" stroke-linecap="round"/>
-            <path d="M22 47L31 38L38 43L49 30" stroke="#38D973" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M49 30V40M49 30H39" stroke="#38D973" stroke-width="5" stroke-linecap="round"/>
+            <path d="M22 47L31 38L38 43L49 30" stroke="#39E17A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M49 30V40M49 30H39" stroke="#39E17A" stroke-width="5" stroke-linecap="round"/>
           </svg>
         </div>
         <div>
@@ -417,6 +599,7 @@
         <a href="#services">Services</a>
         <a href="#tiers">Tiers</a>
         <a href="#contact">Free Analysis</a>
+        <a class="nav-cta" id="navBook" href="#">Book a Call</a>
       </nav>
     </header>
 
@@ -425,14 +608,15 @@
         <div>
           <div class="eyebrow"><span class="dot"></span> Mortgage marketing intelligence</div>
           <h1>Turn marketing spend into <span class="gradient-text">funded loans.</span></h1>
+
           <p class="lead">
             LenderLens Analytics connects your ad, lead, CRM, and loan-funnel data to show what is working,
             what is wasting money, and where to shift budget next.
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="#contact">Get a Free Analysis</a>
-            <a class="btn btn-secondary" href="mailto:insights@lenderlens.net?subject=Sales%20Call%20Request%20-%20LenderLens">Book a Sales Call</a>
+            <a class="btn btn-primary" id="heroAnalysis" href="#contact">Get a Free Analysis</a>
+            <a class="btn btn-secondary" id="heroBook" href="#">Book a Sales Call</a>
           </div>
 
           <div class="proof">
@@ -444,21 +628,25 @@
 
         <div class="visual">
           <div class="house-card">
-            <p style="color:#b7c4cf;margin:0;">LenderLens funnel view</p>
-            <h2 style="font-size:34px;margin:8px 0 0;letter-spacing:-.04em;">From leads to loans, clearly.</h2>
+            <p>LenderLens funnel view</p>
+            <h2>From leads to loans, clearly.</h2>
 
             <svg class="chart-house" viewBox="0 0 520 300" fill="none">
               <path d="M90 140L260 40L430 140V260H90V140Z" stroke="#DFFFEA" stroke-width="10" stroke-linejoin="round"/>
-              <rect x="145" y="205" width="38" height="55" rx="4" fill="#38D973" opacity=".55"/>
-              <rect x="205" y="172" width="38" height="88" rx="4" fill="#38D973" opacity=".7"/>
-              <rect x="265" y="135" width="38" height="125" rx="4" fill="#38D973" opacity=".85"/>
-              <rect x="325" y="92" width="38" height="168" rx="4" fill="#38D973"/>
+              <rect x="145" y="205" width="38" height="55" rx="4" fill="#39E17A" opacity=".55"/>
+              <rect x="205" y="172" width="38" height="88" rx="4" fill="#39E17A" opacity=".7"/>
+              <rect x="265" y="135" width="38" height="125" rx="4" fill="#39E17A" opacity=".85"/>
+              <rect x="325" y="92" width="38" height="168" rx="4" fill="#39E17A"/>
               <path d="M130 205L215 160L285 181L395 92" stroke="#DFFFEA" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M395 92H355M395 92V132" stroke="#DFFFEA" stroke-width="9" stroke-linecap="round"/>
             </svg>
           </div>
 
           <div class="mini-dashboard">
+            <div class="dash-head">
+              <span>Live sample output</span>
+              <span class="live-pill">Insight-ready</span>
+            </div>
             <div class="dash-row"><span>Lead volume</span><strong>+18.4%</strong></div>
             <div class="dash-row"><span>Cost per lead</span><strong class="positive">-12.1%</strong></div>
             <div class="dash-row"><span>Application rate</span><strong>9.8%</strong></div>
@@ -468,7 +656,7 @@
         </div>
       </section>
 
-      <section class="section" id="services">
+      <section id="services">
         <h2 class="section-title">Built for lenders who need answers, not more dashboards.</h2>
         <p class="section-sub">
           We transform fragmented marketing and CRM exports into decision-ready reporting focused on revenue, not vanity metrics.
@@ -484,18 +672,18 @@
           <div class="card">
             <div class="icon">🔎</div>
             <h3>Waste Detection</h3>
-            <p>Find campaigns and lead sources that generate volume but fail to produce qualified, fundable borrowers.</p>
+            <p>Find campaigns and lead sources that create volume but fail to produce qualified, fundable borrowers.</p>
           </div>
 
           <div class="card">
             <div class="icon">🎯</div>
             <h3>Actionable Recommendations</h3>
-            <p>Receive plain-English insights showing where to cut, where to scale, and what to test next.</p>
+            <p>Receive plain-English recommendations showing where to cut, where to scale, and what to test next.</p>
           </div>
         </div>
       </section>
 
-      <section class="section" id="tiers">
+      <section id="tiers">
         <h2 class="section-title">Choose the level of intelligence your team needs.</h2>
         <p class="section-sub">Start simple, then add deeper strategy as your data maturity grows.</p>
 
@@ -510,7 +698,7 @@
             </ul>
           </div>
 
-          <div class="card" style="border-color:rgba(56,217,115,.45);">
+          <div class="card tier-featured">
             <h3>Growth</h3>
             <p>Weekly insights for lenders actively optimizing spend.</p>
             <ul>
@@ -532,35 +720,76 @@
         </div>
       </section>
 
-      <section class="section" id="contact">
+      <section id="contact">
         <div class="contact">
           <div>
             <h2 class="section-title">Get a free sample analysis.</h2>
             <p class="section-sub">
-              Send your contact information and we’ll schedule a quick call to discuss your marketing data,
-              lead sources, CRM exports, and reporting goals.
+              Send your contact information or book directly. Your booking link should use Google Calendar Appointment Schedule
+              so appointments automatically block your availability and create a Google Meet invite.
             </p>
+
+            <div class="contact-options">
+              <a class="btn btn-primary" id="sideBook" href="#">Book a Sales Call</a>
+              <a class="btn btn-secondary" href="mailto:insights@lenderlens.net?subject=LenderLens%20Free%20Analysis%20Request&body=Hi%20LenderLens%2C%0A%0AI%27d%20like%20a%20free%20analysis.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AInterested%20tier%3A%0A">Email insights@lenderlens.net</a>
+            </div>
+
             <p class="fine">
-              Prefer email? Contact us directly at
-              <a style="color:#7dffa6;" href="mailto:insights@lenderlens.net">insights@lenderlens.net</a>.
+              Availability target: Monday–Friday, 9 AM–6 PM Pacific. Once you create your Google Calendar appointment schedule,
+              Google will automatically remove booked times.
             </p>
           </div>
 
-          <form action="mailto:insights@lenderlens.net" method="post" enctype="text/plain">
-            <input name="Name" placeholder="Your name" required />
-            <input name="Company" placeholder="Company name" />
-            <input name="Email" type="email" placeholder="Email address" required />
-            <input name="Phone" placeholder="Phone number" />
-            <select name="Interested Tier">
-              <option>Interested in Starter</option>
-              <option>Interested in Growth</option>
-              <option>Interested in Executive</option>
-              <option>Not sure yet</option>
-            </select>
-            <textarea name="Message" placeholder="Tell us what data you currently have: Google Ads, Meta, CRM, LOS, lead vendors, GA4, etc."></textarea>
-            <button class="btn btn-primary" type="submit">Send Request</button>
-            <a class="btn btn-secondary" href="mailto:insights@lenderlens.net?subject=Sales%20Call%20Request%20-%20LenderLens&body=Hi%20LenderLens%2C%0A%0AI%27d%20like%20to%20book%20a%20sales%20call.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AInterested%20tier%3A%0A">Book a Sales Call by Email</a>
-          </form>
+          <div class="form-card">
+            <form id="leadForm">
+              <div class="form-grid">
+                <div>
+                  <label for="name">Your name</label>
+                  <input id="name" name="name" placeholder="Jane Smith" required />
+                </div>
+                <div>
+                  <label for="company">Company</label>
+                  <input id="company" name="company" placeholder="ABC Mortgage" />
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="jane@company.com" required />
+                </div>
+                <div>
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" placeholder="(555) 555-5555" />
+                </div>
+              </div>
+
+              <div>
+                <label for="tier">Interested tier</label>
+                <select id="tier" name="tier">
+                  <option>Starter - monthly summary</option>
+                  <option>Growth - weekly insights</option>
+                  <option>Executive - forecasting and budget strategy</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message">What data do you currently have?</label>
+                <textarea id="message" name="message" placeholder="Google Ads, Meta, CRM, LOS, lead vendors, GA4, call tracking, etc."></textarea>
+              </div>
+
+              <button class="btn btn-primary btn-full" type="submit">Send Request</button>
+              <a class="btn btn-secondary btn-full" id="formBook" href="#">Skip Form and Book a Call</a>
+
+              <div id="formStatus" class="status"></div>
+
+              <p class="fine">
+                This form works instantly with your email app as a free fallback. For true background submissions, replace
+                <strong>TALLY_FORM_LINK</strong> with your Tally form URL.
+              </p>
+            </form>
+          </div>
         </div>
       </section>
     </main>
@@ -570,5 +799,93 @@
       <div>Marketing intelligence for mortgage lenders.</div>
     </footer>
   </div>
+
+  <div class="floating-bar">
+    <a class="float-primary" id="floatBook" href="#">Book Call</a>
+    <a class="float-secondary" href="#contact">Free Analysis</a>
+  </div>
+
+  <script>
+    function isPlaceholder(value) {
+      return !value || value.includes("YOUR_");
+    }
+
+    function openBooking() {
+      if (isPlaceholder(BOOKING_LINK)) {
+        alert("Booking is not connected yet. Create your Google Calendar Appointment Schedule, then replace BOOKING_LINK in the index.html file.");
+        return false;
+      }
+      window.open(BOOKING_LINK, "_blank", "noopener,noreferrer");
+      return false;
+    }
+
+    function openTallyOrContact() {
+      if (!isPlaceholder(TALLY_FORM_LINK)) {
+        window.open(TALLY_FORM_LINK, "_blank", "noopener,noreferrer");
+        return false;
+      }
+      document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
+      return false;
+    }
+
+    function buildEmailBody(data) {
+      return [
+        "Hi LenderLens,",
+        "",
+        "I would like a free analysis.",
+        "",
+        "Name: " + data.name,
+        "Company: " + data.company,
+        "Email: " + data.email,
+        "Phone: " + data.phone,
+        "Interested tier: " + data.tier,
+        "",
+        "Current data/tools:",
+        data.message,
+        "",
+        "Please contact me to discuss next steps."
+      ].join("\n");
+    }
+
+    document.querySelectorAll("#navBook, #heroBook, #sideBook, #formBook, #floatBook").forEach(el => {
+      el.addEventListener("click", openBooking);
+    });
+
+    document.querySelector("#heroAnalysis").addEventListener("click", openTallyOrContact);
+
+    document.querySelector("#leadForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const status = document.querySelector("#formStatus");
+      const data = {
+        name: document.querySelector("#name").value.trim(),
+        company: document.querySelector("#company").value.trim(),
+        email: document.querySelector("#email").value.trim(),
+        phone: document.querySelector("#phone").value.trim(),
+        tier: document.querySelector("#tier").value,
+        message: document.querySelector("#message").value.trim()
+      };
+
+      if (!data.name || !data.email) {
+        status.className = "status bad";
+        status.textContent = "Please enter your name and email.";
+        return;
+      }
+
+      if (!isPlaceholder(TALLY_FORM_LINK)) {
+        window.open(TALLY_FORM_LINK, "_blank", "noopener,noreferrer");
+        status.className = "status good";
+        status.textContent = "Opening secure request form.";
+        return;
+      }
+
+      const subject = encodeURIComponent("LenderLens Free Analysis Request - " + (data.company || data.name));
+      const body = encodeURIComponent(buildEmailBody(data));
+      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
+
+      status.className = "status good";
+      status.textContent = "Your email app should open with the request filled in. Send it to complete the request.";
+    });
+  </script>
 </body>
 </html>
