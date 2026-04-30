@@ -3,40 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>LenderLens Analytics | Mortgage Marketing Intelligence</title>
-  <meta name="description" content="LenderLens Analytics helps mortgage lenders turn marketing spend, CRM data, and lead sources into funded-loan intelligence." />
 
   <style>
     :root {
-      --bg: #061014;
+      --bg: #020617;
+      --panel: rgba(255,255,255,0.075);
+      --line: rgba(255,255,255,0.14);
       --text: #f8fafc;
-      --muted: #b8c6d1;
-      --green: #39e17a;
-      --green2: #0f9f56;
-      --blue: #62c7ff;
-      --line: rgba(255, 255, 255, 0.16);
-      --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      --muted: #a7b4c4;
+      --green: #38f28b;
+      --blue: #38bdf8;
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
     }
 
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 75% 18%, rgba(57, 225, 122, 0.26), transparent 34%),
-        radial-gradient(circle at 18% 18%, rgba(98, 199, 255, 0.12), transparent 31%),
-        linear-gradient(135deg, #061014 0%, #0b171b 45%, #04110a 100%);
-      min-height: 100vh;
+        radial-gradient(circle at 15% 12%, rgba(56,189,248,.20), transparent 30%),
+        radial-gradient(circle at 85% 8%, rgba(56,242,139,.22), transparent 30%),
+        linear-gradient(135deg, #020617 0%, #07111f 48%, #020617 100%);
       overflow-x: hidden;
     }
 
-    body::before {
+    body:before {
       content: "";
       position: fixed;
       inset: 0;
@@ -44,17 +40,7 @@
       background-image:
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
-      z-index: 0;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.42) 100%);
+      background-size: 52px 52px;
       z-index: 0;
     }
 
@@ -62,7 +48,7 @@
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     header {
@@ -76,116 +62,99 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      color: white;
       text-decoration: none;
+      color: white;
     }
 
-    .logo-box {
+    .logo {
       width: 54px;
       height: 54px;
-      border-radius: 17px;
-      background: linear-gradient(145deg, rgba(57,225,122,.24), rgba(98,199,255,.10));
-      border: 1px solid var(--line);
+      border-radius: 18px;
       display: grid;
       place-items: center;
-      box-shadow: 0 0 42px rgba(57,225,122,.20);
+      background: linear-gradient(145deg, rgba(56,242,139,.20), rgba(56,189,248,.12));
+      border: 1px solid var(--line);
+      box-shadow: 0 0 45px rgba(56,242,139,.20);
     }
 
     .brand strong {
+      display: block;
       font-size: 23px;
       letter-spacing: -0.045em;
-      display: block;
     }
 
     .brand span {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: .23em;
-      text-transform: uppercase;
       display: block;
-      margin-top: -3px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--muted);
+      text-transform: uppercase;
     }
 
     nav a {
+      margin-left: 24px;
       color: var(--muted);
       text-decoration: none;
       font-size: 14px;
     }
 
-    nav a:hover {
-      color: white;
-    }
-
-    .nav-cta {
-      color: #031107;
-      background: linear-gradient(135deg, #8cffb3, var(--green));
-      padding: 11px 15px;
-      border-radius: 999px;
-      font-weight: 800;
-    }
+    nav a:hover { color: white; }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 50px;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 52px;
       align-items: center;
-      padding: 56px 0 44px;
+      padding: 70px 0 62px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      border: 1px solid var(--line);
-      background: rgba(57,225,122,.10);
-      color: #e5fff0;
+      padding: 9px 13px;
       border-radius: 999px;
-      padding: 8px 13px;
+      border: 1px solid rgba(56,242,139,.28);
+      background: rgba(56,242,139,.09);
+      color: #d9ffe9;
       font-size: 13px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
-    .dot {
+    .pulse {
       width: 8px;
       height: 8px;
-      background: var(--green);
       border-radius: 50%;
+      background: var(--green);
       box-shadow: 0 0 18px var(--green);
     }
 
     h1 {
-      font-size: clamp(43px, 6vw, 78px);
-      line-height: .94;
+      font-size: clamp(46px, 6.4vw, 82px);
+      line-height: .92;
       letter-spacing: -0.075em;
       margin: 0 0 24px;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #fff, #b8ffd2 52%, #8cd8ff);
+    .gradient {
+      background: linear-gradient(90deg, #fff, #bfffd8 52%, #93dcff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .lead {
-      color: var(--muted);
       font-size: 20px;
       line-height: 1.55;
-      max-width: 660px;
-      margin: 0 0 30px;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 0 32px;
     }
 
     .actions {
       display: flex;
-      flex-wrap: wrap;
       gap: 14px;
-      align-items: center;
+      flex-wrap: wrap;
       margin-bottom: 34px;
     }
 
@@ -193,56 +162,50 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 15px 20px;
+      gap: 10px;
+      padding: 15px 21px;
       border-radius: 15px;
-      border: 1px solid transparent;
-      font-size: 15px;
       font-weight: 850;
-      cursor: pointer;
+      font-size: 15px;
       text-decoration: none;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: .22s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
-      color: #021006;
-      background: linear-gradient(135deg, #8cffb3, var(--green));
-      box-shadow: 0 20px 50px rgba(57,225,122,.25);
+      background: linear-gradient(135deg, #8affb7, var(--green));
+      color: #031107;
+      box-shadow: 0 20px 50px rgba(56,242,139,.25);
     }
 
     .btn-secondary {
-      color: white;
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.075);
       border-color: var(--line);
-    }
-
-    .btn-full {
-      width: 100%;
+      color: white;
     }
 
     .proof {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      max-width: 730px;
+      max-width: 740px;
     }
 
     .proof-card {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.055);
+      border-radius: 20px;
       padding: 16px;
-      border-radius: 19px;
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(18px);
     }
 
     .proof-card strong {
       display: block;
-      font-size: 20px;
-      color: white;
+      font-size: 24px;
+      letter-spacing: -0.04em;
     }
 
     .proof-card span {
@@ -252,123 +215,102 @@
 
     .visual {
       position: relative;
-      min-height: 560px;
-      overflow: visible;
+      min-height: 520px;
     }
 
-    .house-card {
-      position: absolute;
-      top: 20px;
-      right: 0;
+    .dashboard {
       width: min(520px, 100%);
-      min-height: 390px;
       border: 1px solid var(--line);
       border-radius: 36px;
       background:
         linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.045)),
-        radial-gradient(circle at 68% 32%, rgba(57,225,122,.28), transparent 35%);
+        radial-gradient(circle at 70% 18%, rgba(56,242,139,.23), transparent 34%);
       box-shadow: var(--shadow);
-      overflow: hidden;
-      padding: 34px;
-      backdrop-filter: blur(20px);
-    }
-
-    .house-card::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      bottom: -125px;
-      width: 340px;
-      height: 340px;
-      background: rgba(57,225,122,.20);
-      filter: blur(75px);
-    }
-
-    .house-card p {
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .house-card h2 {
-      font-size: 34px;
-      margin: 8px 0 0;
-      letter-spacing: -0.045em;
-      line-height: 1.05;
-    }
-
-    .chart-house {
-      width: 82%;
-      height: 210px;
-      margin: 36px auto 0;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-
-    .mini-dashboard {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      width: 335px;
-      border: 1px solid var(--line);
-      border-radius: 25px;
-      background: rgba(7,16,20,.92);
-      box-shadow: var(--shadow);
-      padding: 20px;
       backdrop-filter: blur(22px);
+      padding: 28px;
+      overflow: hidden;
     }
 
-    .dash-head {
+    .dashboard-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: white;
-      font-weight: 850;
-      margin-bottom: 6px;
+      margin-bottom: 24px;
     }
 
-    .live-pill {
-      color: #c9ffdb;
-      font-size: 12px;
-      background: rgba(57,225,122,.12);
-      border: 1px solid rgba(57,225,122,.28);
+    .chip {
+      color: #cfffe1;
+      border: 1px solid rgba(56,242,139,.24);
+      background: rgba(56,242,139,.08);
+      padding: 8px 11px;
       border-radius: 999px;
-      padding: 5px 8px;
+      font-size: 12px;
     }
 
-    .dash-row {
+    .bars {
+      height: 220px;
       display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,.09);
-      padding: 12px 0;
+      gap: 14px;
+      align-items: end;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(0,0,0,.24);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 999px 999px 8px 8px;
+      background: linear-gradient(to top, #16a34a, var(--green));
+    }
+
+    .bar:nth-child(1) { height: 44%; }
+    .bar:nth-child(2) { height: 62%; }
+    .bar:nth-child(3) { height: 48%; }
+    .bar:nth-child(4) { height: 82%; }
+    .bar:nth-child(5) { height: 70%; }
+    .bar:nth-child(6) { height: 92%; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.22);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .metric small {
       color: var(--muted);
-      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
     }
 
-    .dash-row strong {
-      color: white;
+    .metric strong {
+      font-size: 22px;
+      letter-spacing: -0.04em;
     }
 
-    .positive {
-      color: #8cffb3 !important;
+    .section {
+      padding: 62px 0;
     }
 
-    section {
-      padding: 58px 0;
-    }
-
-    .section-title {
-      font-size: clamp(30px, 4vw, 49px);
+    .section h2 {
+      font-size: clamp(32px, 4.2vw, 52px);
       letter-spacing: -0.06em;
-      line-height: 1.02;
       margin: 0 0 14px;
     }
 
     .section-sub {
       color: var(--muted);
-      max-width: 760px;
       font-size: 18px;
-      margin: 0 0 30px;
+      max-width: 760px;
+      margin: 0 0 32px;
       line-height: 1.55;
     }
 
@@ -381,21 +323,21 @@
     .card {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.065);
-      border-radius: 25px;
+      border-radius: 26px;
       padding: 26px;
-      min-height: 220px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 14px 50px rgba(0,0,0,.20);
+      min-height: 225px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
     }
 
     .icon {
-      width: 47px;
-      height: 47px;
-      border-radius: 15px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
       display: grid;
       place-items: center;
-      background: rgba(57,225,122,.13);
-      border: 1px solid rgba(57,225,122,.25);
+      background: rgba(56,242,139,.11);
+      border: 1px solid rgba(56,242,139,.22);
       margin-bottom: 18px;
       font-size: 22px;
     }
@@ -405,245 +347,143 @@
       font-size: 21px;
     }
 
-    .card p,
-    .card li {
+    .card p, .card li {
       color: var(--muted);
+      line-height: 1.55;
       font-size: 15px;
-      line-height: 1.5;
     }
 
     .card ul {
-      padding-left: 18px;
       margin: 12px 0 0;
+      padding-left: 18px;
     }
 
-    .tier-featured {
-      border-color: rgba(57,225,122,.48);
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .tier {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .tier.featured {
+      border-color: rgba(56,242,139,.42);
       background:
-        radial-gradient(circle at 80% 0%, rgba(57,225,122,.16), transparent 30%),
+        radial-gradient(circle at 50% 0%, rgba(56,242,139,.18), transparent 42%),
         rgba(255,255,255,.075);
+      transform: translateY(-12px);
+    }
+
+    .tier h3 {
+      font-size: 24px;
+      margin: 0 0 6px;
+    }
+
+    .price {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      margin: 16px 0;
+    }
+
+    .tier small, .tier li {
+      color: var(--muted);
+    }
+
+    .tier li {
+      margin-bottom: 10px;
     }
 
     .contact {
       display: grid;
-      grid-template-columns: .92fr 1.08fr;
-      gap: 28px;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 30px;
       align-items: start;
       border: 1px solid var(--line);
       border-radius: 34px;
       padding: 34px;
       background:
-        radial-gradient(circle at 10% 0%, rgba(57,225,122,.22), transparent 28%),
+        radial-gradient(circle at 8% 0%, rgba(56,242,139,.18), transparent 34%),
         rgba(255,255,255,.065);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .contact-options {
-      display: grid;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .form-card {
-      border: 1px solid var(--line);
-      background: rgba(3,10,13,.40);
-      border-radius: 24px;
-      padding: 22px;
+      backdrop-filter: blur(20px);
     }
 
     form {
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
 
     label {
-      color: #dbe7ee;
-      font-weight: 700;
       font-size: 13px;
+      color: #d7dee7;
+      font-weight: 700;
     }
 
-    input,
-    textarea,
-    select {
+    input, select, textarea {
       width: 100%;
-      padding: 15px 16px;
-      border-radius: 15px;
-      border: 1px solid var(--line);
-      background: rgba(4,9,12,.65);
+      margin-top: 7px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.30);
       color: white;
       outline: none;
       font: inherit;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: rgba(57,225,122,.65);
-      box-shadow: 0 0 0 4px rgba(57,225,122,.10);
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #81909d;
-    }
-
     textarea {
-      min-height: 115px;
+      min-height: 120px;
       resize: vertical;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    button {
+      border: 0;
     }
 
     .fine {
-      color: #91a0aa;
+      color: var(--muted);
       font-size: 13px;
-      line-height: 1.45;
-      margin: 12px 0 0;
-    }
-
-    .fine a {
-      color: #8cffb3;
-    }
-
-    .status {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-    }
-
-    .status.good {
-      display: block;
-      color: #dfffea;
-      background: rgba(57,225,122,.12);
-      border: 1px solid rgba(57,225,122,.25);
-    }
-
-    .status.bad {
-      display: block;
-      color: #ffe0e0;
-      background: rgba(255,107,107,.12);
-      border: 1px solid rgba(255,107,107,.25);
+      line-height: 1.5;
     }
 
     footer {
-      border-top: 1px solid var(--line);
-      padding: 26px 0 36px;
+      padding: 34px 0 48px;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 40px;
       font-size: 14px;
     }
 
-    .floating-bar {
-      display: none;
-      position: fixed;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-      z-index: 20;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(4, 10, 13, .86);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-      gap: 10px;
-    }
-
-    .floating-bar a {
-      flex: 1;
-      padding: 13px 12px;
-      border-radius: 14px;
-      text-align: center;
-      text-decoration: none;
-      font-weight: 850;
-      font-size: 14px;
-    }
-
-    .float-primary {
-      color: #031107;
-      background: linear-gradient(135deg, #8cffb3, var(--green));
-    }
-
-    .float-secondary {
-      color: white;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.07);
-    }
-
-    @media (max-width: 920px) {
-      .hero,
-      .contact {
-        grid-template-columns: 1fr;
-      }
-
-      .visual {
-        min-height: 520px;
-      }
-
-      .grid3,
-      .proof {
-        grid-template-columns: 1fr;
-      }
-
-      nav {
-        display: none;
-      }
-
-      .house-card {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        width: min(520px, 100%);
-      }
-
-      .mini-dashboard {
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(335px, calc(100% - 24px));
-        bottom: 8px;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .floating-bar {
-        display: flex;
-      }
-
-      body {
-        padding-bottom: 86px;
-      }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hero, .contact { grid-template-columns: 1fr; }
+      .proof, .grid3, .tiers { grid-template-columns: 1fr; }
+      .tier.featured { transform: none; }
+      footer { flex-direction: column; }
     }
   </style>
 </head>
 
 <body>
-  <script>
-    const TALLY_FORM_LINK = "https://tally.so/r/YOUR_FORM_ID";
-    const BOOKING_LINK = "https://calendar.google.com/calendar/appointments/schedules/YOUR_BOOKING_ID";
-    const CONTACT_EMAIL = "insights@lenderlens.net";
-  </script>
-
   <div class="wrap">
+
     <header>
       <a class="brand" href="#">
-        <div class="logo-box" aria-hidden="true">
-          <svg width="35" height="35" viewBox="0 0 64 64" fill="none">
-            <path d="M8 31L32 12L56 31" stroke="#DFFFEA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 29V54H48V29" stroke="#DFFFEA" stroke-width="5" stroke-linecap="round"/>
-            <path d="M22 47L31 38L38 43L49 30" stroke="#39E17A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M49 30V40M49 30H39" stroke="#39E17A" stroke-width="5" stroke-linecap="round"/>
+        <div class="logo">
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <path d="M8 35L32 14L56 35" stroke="#38f28b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 31V53H48V31" stroke="#38f28b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 42C27 35 37 35 42 42C37 49 27 49 22 42Z" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="42" r="4" fill="#38bdf8"/>
           </svg>
         </div>
         <div>
@@ -654,297 +494,222 @@
 
       <nav>
         <a href="#services">Services</a>
-        <a href="#tiers">Tiers</a>
+        <a href="#tiers">Plans</a>
         <a href="#contact">Free Analysis</a>
-        <a class="nav-cta" id="navBook" href="#">Book a Call</a>
+        <a href="mailto:insights@lenderlens.net">Email</a>
       </nav>
     </header>
 
-    <main>
-      <section class="hero">
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> Mortgage marketing intelligence for lenders</div>
+
+        <h1>Turn marketing spend into <span class="gradient">funded loans.</span></h1>
+
+        <p class="lead">
+          LenderLens connects ad spend, lead sources, CRM activity, and loan-funnel outcomes into executive-ready insights so lenders know what is working, what is wasting money, and what to fix next.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact">Request Free Analysis</a>
+          <a class="btn btn-secondary" href="mailto:insights@lenderlens.net?subject=Free%20LenderLens%20Analysis%20Request">Email Us</a>
+          <a class="btn btn-secondary" href="https://calendar.google.com/calendar/u/0/appointments" target="_blank" rel="noopener">Book a Sales Call</a>
+        </div>
+
+        <div class="proof">
+          <div class="proof-card">
+            <strong>Spend → Funded</strong>
+            <span>Marketing attribution by loan outcome</span>
+          </div>
+          <div class="proof-card">
+            <strong>CRM + Ads</strong>
+            <span>One funnel view from messy exports</span>
+          </div>
+          <div class="proof-card">
+            <strong>Weekly Action</strong>
+            <span>Clear recommendations, not noise</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="dashboard">
+          <div class="dashboard-top">
+            <div>
+              <strong>Executive Funnel Intelligence</strong><br>
+              <span style="color:var(--muted);font-size:13px;">Prepared by LenderLens Analytics</span>
+            </div>
+            <div class="chip">Package Preview</div>
+          </div>
+
+          <div class="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric"><small>Cost Per Lead</small><strong>$84</strong></div>
+            <div class="metric"><small>App Conversion</small><strong>18.7%</strong></div>
+            <div class="metric"><small>Funded Rate</small><strong>4.9%</strong></div>
+            <div class="metric"><small>Waste Flagged</small><strong>$12.4k</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <h2>Built for mortgage teams that need decisions, not dashboards.</h2>
+      <p class="section-sub">
+        We turn scattered marketing and CRM exports into a consistent reporting package leadership can actually use.
+      </p>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Funnel Analytics</h3>
+          <p>Track spend, leads, applications, locks, funded loans, and conversion rates across the full borrower journey.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎯</div>
+          <h3>Attribution Intelligence</h3>
+          <p>Understand which campaigns, channels, geographies, and lead sources are creating fundable borrowers.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Executive Insights</h3>
+          <p>Receive clear recommendations, budget guidance, and plain-English explanations of what changed and what to do next.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tiers" class="section">
+      <h2>Choose the analysis depth that matches your growth stage.</h2>
+      <p class="section-sub">
+        Every package is designed to be consistent, professional, and focused on marketing performance tied to real loan outcomes.
+      </p>
+
+      <div class="tiers">
+        <div class="tier">
+          <h3>Starter</h3>
+          <small>Monthly visibility</small>
+          <div class="price">$750+</div>
+          <ul>
+            <li>Monthly dashboard PDF</li>
+            <li>Marketing funnel summary</li>
+            <li>Top wins and issues</li>
+            <li>Basic recommendations</li>
+          </ul>
+        </div>
+
+        <div class="tier featured">
+          <h3>Growth</h3>
+          <small>Best for active marketing teams</small>
+          <div class="price">$1,500+</div>
+          <ul>
+            <li>Weekly performance insights</li>
+            <li>Channel and campaign attribution</li>
+            <li>Lead quality and drop-off analysis</li>
+            <li>Budget waste detection</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <h3>Executive</h3>
+          <small>Strategy and forecasting</small>
+          <div class="price">$3,000+</div>
+          <ul>
+            <li>Everything in Growth</li>
+            <li>Forecasting and scenario planning</li>
+            <li>Budget reallocation strategy</li>
+            <li>Executive decision memo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="contact">
         <div>
-          <div class="eyebrow"><span class="dot"></span> Mortgage marketing intelligence</div>
-
-          <h1>Turn marketing spend into <span class="gradient-text">funded loans.</span></h1>
-
-          <p class="lead">
-            LenderLens Analytics connects your ad, lead, CRM, and loan-funnel data to show what is working,
-            what is wasting money, and where to shift budget next.
+          <div class="eyebrow"><span class="pulse"></span> Free analysis request</div>
+          <h2>Send your info. We’ll review whether LenderLens can help.</h2>
+          <p class="section-sub">
+            Submit your company details and you’ll receive a follow-up from <strong>insights@lenderlens.net</strong>.
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" id="heroAnalysis" href="#contact">Get a Free Analysis</a>
-            <a class="btn btn-secondary" id="heroBook" href="#">Book a Sales Call</a>
+            <a class="btn btn-primary" href="mailto:insights@lenderlens.net?subject=Free%20LenderLens%20Analysis%20Request">Email Directly</a>
+            <a class="btn btn-secondary" href="https://calendar.google.com/calendar/u/0/appointments" target="_blank" rel="noopener">Book Calendar Call</a>
           </div>
 
-          <div class="proof">
-            <div class="proof-card"><strong>Spend → Funded</strong><span>Full-funnel visibility</span></div>
-            <div class="proof-card"><strong>Weekly</strong><span>Insights for growth teams</span></div>
-            <div class="proof-card"><strong>Executive</strong><span>Forecasting and budget strategy</span></div>
-          </div>
+          <p class="fine">
+            Calendar button currently goes to Google Appointment Scheduling. Replace it with your final public booking link after you create one.
+          </p>
         </div>
 
-        <div class="visual">
-          <div class="house-card">
-            <p>LenderLens funnel view</p>
-            <h2>From leads to loans, clearly.</h2>
+        <form action="https://script.google.com/macros/s/AKfycbzwbLQEJ5EKOrgDNkNRT15rTM0Xtg3ztdZ6VQUwfwAw9C4BJ55biLqzBOpzJzNw1DpQnw/exec" method="POST">
+          <label>
+            Full Name
+            <input type="text" name="name" placeholder="John Smith" required />
+          </label>
 
-            <svg class="chart-house" viewBox="0 0 520 300" fill="none">
-              <path d="M90 140L260 40L430 140V260H90V140Z" stroke="#DFFFEA" stroke-width="10" stroke-linejoin="round"/>
-              <rect x="145" y="205" width="38" height="55" rx="4" fill="#39E17A" opacity=".55"/>
-              <rect x="205" y="172" width="38" height="88" rx="4" fill="#39E17A" opacity=".7"/>
-              <rect x="265" y="135" width="38" height="125" rx="4" fill="#39E17A" opacity=".85"/>
-              <rect x="325" y="92" width="38" height="168" rx="4" fill="#39E17A"/>
-              <path d="M130 205L215 160L285 181L395 92" stroke="#DFFFEA" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M395 92H355M395 92V132" stroke="#DFFFEA" stroke-width="9" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <label>
+            Work Email
+            <input type="email" name="email" placeholder="name@company.com" required />
+          </label>
 
-          <div class="mini-dashboard">
-            <div class="dash-head">
-              <span>Sample output</span>
-              <span class="live-pill">Insight-ready</span>
-            </div>
-            <div class="dash-row"><span>Lead volume</span><strong>+18.4%</strong></div>
-            <div class="dash-row"><span>Cost per lead</span><strong class="positive">-12.1%</strong></div>
-            <div class="dash-row"><span>Application rate</span><strong>9.8%</strong></div>
-            <div class="dash-row"><span>Best channel</span><strong>Google Search</strong></div>
-            <div class="dash-row" style="border-bottom:0;"><span>Recommended shift</span><strong class="positive">$4.2k</strong></div>
-          </div>
-        </div>
-      </section>
+          <label>
+            Phone Number
+            <input type="tel" name="phone" placeholder="(555) 123-4567" />
+          </label>
 
-      <section id="services">
-        <h2 class="section-title">Built for lenders who need answers, not more dashboards.</h2>
-        <p class="section-sub">
-          We transform fragmented marketing and CRM exports into decision-ready reporting focused on revenue, not vanity metrics.
-        </p>
+          <label>
+            Company
+            <input type="text" name="company" placeholder="Company name" />
+          </label>
 
-        <div class="grid3">
-          <div class="card">
-            <div class="icon">📊</div>
-            <h3>Marketing Funnel Analytics</h3>
-            <p>Track spend, leads, applications, locks, and funded loans by source, campaign, branch, or geography.</p>
-          </div>
+          <label>
+            Estimated Monthly Marketing Spend
+            <select name="monthly_marketing_spend">
+              <option value="">Select range</option>
+              <option>$5k - $25k</option>
+              <option>$25k - $75k</option>
+              <option>$75k - $150k</option>
+              <option>$150k+</option>
+            </select>
+          </label>
 
-          <div class="card">
-            <div class="icon">🔎</div>
-            <h3>Waste Detection</h3>
-            <p>Find campaigns and lead sources that create volume but fail to produce qualified, fundable borrowers.</p>
-          </div>
+          <label>
+            Preferred Call Date / Time
+            <input type="text" name="preferred_call_time" placeholder="Example: Tuesday 10 AM PST" />
+          </label>
 
-          <div class="card">
-            <div class="icon">🎯</div>
-            <h3>Actionable Recommendations</h3>
-            <p>Receive plain-English recommendations showing where to cut, where to scale, and what to test next.</p>
-          </div>
-        </div>
-      </section>
+          <label>
+            What do you want clearer visibility into?
+            <textarea name="message" placeholder="Example: We spend on Google Ads and lead vendors, but cannot clearly see which sources turn into funded loans."></textarea>
+          </label>
 
-      <section id="tiers">
-        <h2 class="section-title">Choose the level of intelligence your team needs.</h2>
-        <p class="section-sub">Start simple, then add deeper strategy as your data maturity grows.</p>
+          <button class="btn btn-primary" type="submit">Submit Free Analysis Request</button>
 
-        <div class="grid3">
-          <div class="card">
-            <h3>Starter</h3>
-            <p>Monthly analytics package for teams that need basic visibility.</p>
-            <ul>
-              <li>Monthly dashboard PDF</li>
-              <li>Executive summary</li>
-              <li>Top wins and issues</li>
-            </ul>
-          </div>
-
-          <div class="card tier-featured">
-            <h3>Growth</h3>
-            <p>Weekly insights for lenders actively optimizing spend.</p>
-            <ul>
-              <li>Weekly insight memo</li>
-              <li>Attribution commentary</li>
-              <li>Funnel drop-off analysis</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Executive</h3>
-            <p>Strategic intelligence for leadership and budget planning.</p>
-            <ul>
-              <li>Forecasting</li>
-              <li>Budget recommendations</li>
-              <li>Scenario planning</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="contact">
-          <div>
-            <h2 class="section-title">Get a free sample analysis.</h2>
-            <p class="section-sub">
-              Send your contact information or book directly. Once the calendar link is connected, appointments will block availability and create a Google Meet invite.
-            </p>
-
-            <div class="contact-options">
-              <a class="btn btn-primary" id="sideBook" href="#">Book a Sales Call</a>
-              <a class="btn btn-secondary" href="mailto:insights@lenderlens.net?subject=LenderLens%20Free%20Analysis%20Request&body=Hi%20LenderLens%2C%0A%0AI%27d%20like%20a%20free%20analysis.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AInterested%20tier%3A%0A">Email insights@lenderlens.net</a>
-            </div>
-
-            <p class="fine">
-              Availability target: Monday–Friday, 9 AM–6 PM Pacific.
-            </p>
-          </div>
-
-          <div class="form-card">
-            <form id="leadForm">
-              <div class="form-grid">
-                <div>
-                  <label for="name">Your name</label>
-                  <input id="name" name="name" placeholder="Jane Smith" required />
-                </div>
-                <div>
-                  <label for="company">Company</label>
-                  <input id="company" name="company" placeholder="ABC Mortgage" />
-                </div>
-              </div>
-
-              <div class="form-grid">
-                <div>
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="jane@company.com" required />
-                </div>
-                <div>
-                  <label for="phone">Phone</label>
-                  <input id="phone" name="phone" placeholder="(555) 555-5555" />
-                </div>
-              </div>
-
-              <div>
-                <label for="tier">Interested tier</label>
-                <select id="tier" name="tier">
-                  <option>Starter - monthly summary</option>
-                  <option>Growth - weekly insights</option>
-                  <option>Executive - forecasting and budget strategy</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="message">What data do you currently have?</label>
-                <textarea id="message" name="message" placeholder="Google Ads, Meta, CRM, LOS, lead vendors, GA4, call tracking, etc."></textarea>
-              </div>
-
-              <button class="btn btn-primary btn-full" type="submit">Send Request</button>
-              <a class="btn btn-secondary btn-full" id="formBook" href="#">Skip Form and Book a Call</a>
-
-              <div id="formStatus" class="status"></div>
-
-              <p class="fine">
-                This form currently opens the visitor’s email app. After your inbox is ready, connect Tally for background form submissions.
-              </p>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
+          <p class="fine">
+            This form submits to your Google Apps Script and sends the lead to insights@lenderlens.net.
+          </p>
+        </form>
+      </div>
+    </section>
 
     <footer>
       <div>© 2026 LenderLens Analytics. All rights reserved.</div>
-      <div>Marketing intelligence for mortgage lenders.</div>
+      <div>
+        <a style="color:var(--muted);text-decoration:none;" href="mailto:insights@lenderlens.net">insights@lenderlens.net</a>
+      </div>
     </footer>
+
   </div>
-
-  <div class="floating-bar">
-    <a class="float-primary" id="floatBook" href="#">Book Call</a>
-    <a class="float-secondary" href="#contact">Free Analysis</a>
-  </div>
-
-  <script>
-    function isPlaceholder(value) {
-      return !value || value.includes("YOUR_");
-    }
-
-    function openBooking() {
-      if (isPlaceholder(BOOKING_LINK)) {
-        alert("Booking is not connected yet. Create your Google Calendar Appointment Schedule, then replace BOOKING_LINK in the index.html file.");
-        return false;
-      }
-
-      window.open(BOOKING_LINK, "_blank", "noopener,noreferrer");
-      return false;
-    }
-
-    function openTallyOrContact() {
-      if (!isPlaceholder(TALLY_FORM_LINK)) {
-        window.open(TALLY_FORM_LINK, "_blank", "noopener,noreferrer");
-        return false;
-      }
-
-      document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
-      return false;
-    }
-
-    function buildEmailBody(data) {
-      return [
-        "Hi LenderLens,",
-        "",
-        "I would like a free analysis.",
-        "",
-        "Name: " + data.name,
-        "Company: " + data.company,
-        "Email: " + data.email,
-        "Phone: " + data.phone,
-        "Interested tier: " + data.tier,
-        "",
-        "Current data/tools:",
-        data.message,
-        "",
-        "Please contact me to discuss next steps."
-      ].join("\n");
-    }
-
-    document.querySelectorAll("#navBook, #heroBook, #sideBook, #formBook, #floatBook").forEach(el => {
-      el.addEventListener("click", openBooking);
-    });
-
-    document.querySelector("#heroAnalysis").addEventListener("click", openTallyOrContact);
-
-    document.querySelector("#leadForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const status = document.querySelector("#formStatus");
-
-      const data = {
-        name: document.querySelector("#name").value.trim(),
-        company: document.querySelector("#company").value.trim(),
-        email: document.querySelector("#email").value.trim(),
-        phone: document.querySelector("#phone").value.trim(),
-        tier: document.querySelector("#tier").value,
-        message: document.querySelector("#message").value.trim()
-      };
-
-      if (!data.name || !data.email) {
-        status.className = "status bad";
-        status.textContent = "Please enter your name and email.";
-        return;
-      }
-
-      if (!isPlaceholder(TALLY_FORM_LINK)) {
-        window.open(TALLY_FORM_LINK, "_blank", "noopener,noreferrer");
-        status.className = "status good";
-        status.textContent = "Opening secure request form.";
-        return;
-      }
-
-      const subject = encodeURIComponent("LenderLens Free Analysis Request - " + (data.company || data.name));
-      const body = encodeURIComponent(buildEmailBody(data));
-
-      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
-
-      status.className = "status good";
-      status.textContent = "Your email app should open with the request filled in. Send it to complete the request.";
-    });
-  </script>
 </body>
 </html>
