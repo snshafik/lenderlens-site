@@ -602,7 +602,9 @@
         <a href="#problem">Problem</a>
         <a href="#services">Solution</a>
         <a href="#pricing">Pricing</a>
-        <a href="#contact">Free Analysis</a>
+        <a href="/funnel-audit.html">One-time Audit</a>
+        <a href="/decision-lab.html">Live Demo</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
@@ -618,7 +620,8 @@
 
         <div class="actions">
           <a class="btn btn-primary" href="https://calendar.app.google/4rwnQvd1KTgpHQ4VA" target="_blank" rel="noopener">Book Funnel Strategy Session</a>
-          <a class="btn btn-secondary" href="#contact">Request Free Analysis</a>
+          <a class="btn btn-secondary" href="/funnel-audit.html">View $495 Funnel Audit</a>
+          <a class="btn btn-secondary" href="/decision-lab.html">Try Interactive Demo</a>
           <a class="btn btn-secondary" href="mailto:insights@lenderlens.net">Email Us</a>
         </div>
 
@@ -643,7 +646,7 @@
           <div class="dashboard-top">
             <div>
               <strong>Executive Funnel Intelligence</strong><br>
-              <span style="color:var(--muted);font-size:13px;">Sample LenderLens performance view</span>
+              <span style="color:var(--muted);font-size:13px;">Synthetic illustrative data — not actual customer results</span>
             </div>
             <div class="chip">Revenue Lens</div>
           </div>
@@ -740,10 +743,24 @@
       </div>
     </section>
 
+    <section id="pilot" class="section">
+      <div class="card good" style="padding:30px;border-color:rgba(56,242,139,.45)">
+        <div class="eyebrow"><span class="pulse"></span> Founding-client offer • one-time</div>
+        <h2 style="margin-top:18px">Start with a $495 Mortgage Funnel Leak Audit.</h2>
+        <p class="section-sub">Before committing to a monthly analytics program, assess up to 90 days of aggregate marketing and funnel data for one business unit and up to three acquisition channels. Receive a concise findings report, prioritized next steps, and a 30-minute review call. No subscription required.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/funnel-audit.html">See the $495 Audit Scope</a>
+          <a class="btn btn-secondary" href="https://calendar.app.google/4rwnQvd1KTgpHQ4VA" target="_blank" rel="noopener">Discuss Your Funnel</a>
+          <a class="btn btn-secondary" href="/decision-lab.html">Explore the Decision Lab</a>
+        </div>
+        <p class="fine">Uses aggregate or properly de-identified data only. We do not request borrower personal information. All findings depend on the completeness of available data.</p>
+      </div>
+    </section>
+
     <section id="pricing" class="section">
       <h2>Simple packages. Serious intelligence.</h2>
       <p class="section-sub">
-        Pricing is intentionally positioned for lenders that are already investing in marketing and want better visibility into funded-loan performance.
+        Explore our ongoing packages below. If you are not ready for a recurring engagement, <a href="/funnel-audit.html" style="color:#38f28b">start with a fixed-scope $495 funnel audit</a>.
       </p>
 
       <div class="tiers">
@@ -788,10 +805,10 @@
     <section id="contact" class="section">
       <div class="contact">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> Free analysis request</div>
+          <div class="eyebrow"><span class="pulse"></span> Free introductory consultation</div>
           <h2>Want to know where your marketing budget is leaking?</h2>
           <p class="section-sub">
-            Submit your info or book a strategy session. You’ll receive a follow-up from <strong>insights@lenderlens.net</strong>.
+            Request a short introductory conversation about your funnel. A full <a href="/funnel-audit.html" style="color:#38f28b">$495 paid audit</a> has a separate, clearly defined scope. You’ll receive a follow-up from <strong>insights@lenderlens.net</strong>.
           </p>
 
           <div class="actions">
@@ -804,13 +821,14 @@
           </p>
         </div>
 
-        <form action="https://script.google.com/macros/s/AKfycbzwbLQEJ5EKOrgDNkNRT15rTM0Xtg3ztdZ6VQUwfwAw9C4BJ55biLqzBOpzJzNw1DpQnw/exec" method="POST">
+        <form id="lead-intake" action="https://script.google.com/macros/s/AKfycbzwbLQEJ5EKOrgDNkNRT15rTM0Xtg3ztdZ6VQUwfwAw9C4BJ55biLqzBOpzJzNw1DpQnw/exec" method="POST">
+          <div style="position:absolute;left:-9999px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this field blank<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
           <label>Full Name
-            <input type="text" name="name" placeholder="John Smith" required />
+            <input type="text" name="name" placeholder="John Smith" minlength="2" maxlength="100" required />
           </label>
 
           <label>Work Email
-            <input type="email" name="email" placeholder="name@company.com" required />
+            <input type="email" name="email" placeholder="name@company.com" maxlength="150" required />
           </label>
 
           <label>Phone Number
@@ -818,11 +836,11 @@
           </label>
 
           <label>Company
-            <input type="text" name="company" placeholder="Company name" />
+            <input type="text" name="company" placeholder="Your mortgage business" minlength="2" maxlength="120" required />
           </label>
 
           <label>Estimated Monthly Marketing Spend
-            <select name="monthly_marketing_spend">
+            <select name="monthly_marketing_spend" required>
               <option value="">Select range</option>
               <option>$5k - $25k</option>
               <option>$25k - $75k</option>
@@ -832,12 +850,13 @@
           </label>
 
           <label>What do you want clearer visibility into?
-            <textarea name="message" placeholder="Example: We spend on Google Ads and lead vendors, but cannot clearly see which sources turn into funded loans."></textarea>
+            <textarea name="message" minlength="25" maxlength="1500" required placeholder="Please describe your mortgage business and one specific question about campaign performance, lead quality, applications, or funded loans."></textarea>
           </label>
 
-          <button class="btn btn-primary" type="submit">Submit Free Analysis Request</button>
+          <button class="btn btn-primary" type="submit">Request an Introductory Call</button>
+          <p class="fine" id="intake-help" role="status" aria-live="polite"></p>
 
-          <p class="fine">Your request is sent securely through the LenderLens intake form.</p>
+          <p class="fine">Please share only business contact details and a high-level challenge. Do not include borrower data, loan numbers, or other sensitive information. We use this information to respond to your request.</p>
         </form>
       </div>
     </section>
@@ -847,5 +866,22 @@
       <div><a style="color:var(--muted);text-decoration:none;" href="mailto:insights@lenderlens.net">insights@lenderlens.net</a></div>
     </footer>
   </div>
+  <script>
+  (() => {
+    const form = document.getElementById('lead-intake');
+    if (!form) return;
+    const openedAt = Date.now();
+    form.addEventListener('submit', (event) => {
+      const honeypot = form.elements.namedItem('website');
+      const message = String(form.elements.namedItem('message')?.value || '');
+      const spamText = /\b(?:rolls.royce|lamborghini|casino|cryptocurrency|million dollars|50000000)\b/i.test(message);
+      if ((honeypot && honeypot.value) || Date.now() - openedAt < 3500 || spamText || /https?:\/\//i.test(message)) {
+        event.preventDefault();
+        const note = document.getElementById('intake-help');
+        if (note) note.textContent = 'Please enter a specific business question without links, then try again.';
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
