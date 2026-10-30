@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><meta name="description" content="An illustrative, synthetic-data example of the LenderLens Mortgage Funnel Leak Audit deliverable."><link rel="canonical" href="https://lenderlens.net/audit-example.html"><title>Sample Funnel Audit | LenderLens Analytics</title>
+<style>:root{color-scheme:dark;--bg:#07111f;--card:#101f33;--line:#35455b;--muted:#c0cbdb;--green:#38f28b}*{box-sizing:border-box}body{font:16px/1.6 system-ui,-apple-system,sans-serif;margin:0;color:#eef6ff;background:var(--bg)}.wrap{max-width:1060px;padding:24px;margin:auto}.top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}a{color:#78ccff}.brand{font-weight:800;color:#fff;text-decoration:none;font-size:24px}.flag{display:inline-block;border-radius:60px;padding:5px 12px;background:#294736;color:#bcfadb;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}h1{font-size:clamp(32px,5vw,50px);line-height:1.12;margin-bottom:14px}h2{margin-top:35px}p{color:var(--muted)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.card{padding:15px;border:1px solid var(--line);background:var(--card);border-radius:12px}.card small{display:block;color:var(--muted)}.card strong{font-size:24px;color:#fff}.scroller{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:710px}th,td{padding:12px 11px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}thead{background:#1b3148}th{font-size:13px}tbody tr:last-child td{border:0}.alert{border:1px solid #42645b;border-radius:14px;background:#102a28;padding:18px 24px}.btn{display:inline-block;color:#05180c!important;text-decoration:none;background:var(--green);font-weight:800;padding:13px 21px;border-radius:10px;margin-top:18px}footer{margin-top:55px;border-top:1px solid var(--line);padding:20px 0;font-size:14px;color:var(--muted)}@media(max-width:710px){.metrics{grid-template-columns:1fr 1fr}}</style></head><body><div class="wrap">
+<header class="top"><a href="/" class="brand">LenderLens Analytics</a><nav><a href="/funnel-audit.html">About the $495 audit</a> · <a href="/decision-lab.html">Decision Lab</a></nav></header>
+<main>
+<p><span class="flag">Synthetic example — not a customer case study</span></p>
+<h1>What a Mortgage Funnel Leak Audit can reveal</h1>
+<p>Illustrative demonstration only. These numbers, sources, and recommendations were created solely to show the form of a deliverable. They do not represent any actual lender or results from LenderLens customers.</p>
+<div class="metrics">
+<div class="card"><small>90-day marketing spend</small><strong>$57,000</strong></div>
+<div class="card"><small>Leads generated</small><strong>750</strong></div>
+<div class="card"><small>Funded loans</small><strong>18</strong></div>
+<div class="card"><small>Blended cost/funded</small><strong>$3,167</strong></div>
+</div>
+<h2>Channel-level funnel economics</h2>
+<div class="scroller"><table><thead><tr><th>Source</th><th>Spend</th><th>Leads</th><th>Applications</th><th>Funded</th><th>Cost/lead</th><th>Cost/funded</th></tr></thead><tbody>
+<tr><td>Paid Search</td><td>$24,000</td><td>240</td><td>36</td><td>9</td><td>$100</td><td>$2,667</td></tr>
+<tr><td>Paid Social</td><td>$18,000</td><td>360</td><td>36</td><td>3</td><td>$50</td><td>$6,000</td></tr>
+<tr><td>Lead Vendor</td><td>$15,000</td><td>150</td><td>18</td><td>6</td><td>$100</td><td>$2,500</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>$57,000</strong></td><td><strong>750</strong></td><td><strong>90</strong></td><td><strong>18</strong></td><td><strong>$76</strong></td><td><strong>$3,167</strong></td></tr>
+</tbody></table></div>
+<p><small>Rounded whole-dollar metrics. Cost per funded loan = channel spend / funded-loan count for the same cohort and measurement window. This arithmetic does not establish causal or incremental returns.</small></p>
+<div class="alert">
+<h2 style="margin-top:0">Illustrative observation: low CPL can conceal expensive funded loans</h2>
+<p>Paid Social appears cheapest at $50 per lead, yet its $6,000 cost per funded loan is approximately 2.4× the Lead Vendor figure. This gap merits review of channel lead quality, stage tracking, contact rates, and timing before reallocation decisions.</p>
+</div>
+<h2>Questions the real audit would test</h2>
+<ol>
+<li>Were all three channels measured over comparable lead cohorts and funding maturity windows?</li>
+<li>How many leads were contacted, qualified, and submitted to underwriting by source?</li>
+<li>Are channel, campaign, application, and funding identifiers consistently mapped?</li>
+<li>Would a controlled change in budget improve contribution after accounting for funded-loan margins and operational capacity?</li>
+</ol>
+<h2>What we would recommend at this stage</h2>
+<p><strong>Investigate first, do not blindly shift budget.</strong> Check Paid Social's downstream records, targeting, and cohort delays. Confirm the Lead Vendor's apparent funded-loan advantage persists after quality and period adjustments. If margins and data quality support it, design a modest, measured budget test with predefined success criteria.</p>
+<p>This example is not a performance promise or a claim that reducing Paid Social would necessarily increase funded loans. A real audit documents data quality, limitations, and decision assumptions.</p>
+<a class="btn" href="/funnel-audit.html">See the one-time $495 audit</a>
+</main><footer>LenderLens Analytics · <a href="mailto:insights@lenderlens.net">insights@lenderlens.net</a> · Synthetic demonstration only</footer></div></body></html>
