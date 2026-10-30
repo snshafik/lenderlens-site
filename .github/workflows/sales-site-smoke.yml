@@ -1,0 +1,49 @@
+name: LenderLens site and checkout CTA smoke test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/sales-site-smoke.yml'
+      - 'index.html'
+      - 'funnel-audit.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check HTTPS website and audit offer
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Allow GitHub Pages publishing time after a push without ignoring failure.
+          for attempt in $(seq 1 12); do
+            if curl --proto '=https' --tlsv1.2 -fsSL --max-time 15 --retry 1 https://lenderlens.net/funnel-audit.html -o audit.html &&
+               grep -Fq 'LenderLens — Mortgage Funnel Leak Audit' audit.html &&
+               grep -Fq 'https://buy.stripe.com/cNi7sL6rH57L21Je5OaVa04' audit.html; then
+              echo "Audit page verified over HTTPS."
+              break
+            fi
+            if [ "$attempt" -eq 12 ]; then
+              echo "::error::Sales page or checkout link not publicly available after retries"
+              exit 1
+            fi
+            sleep 10
+          done
+          curl --proto '=https' --tlsv1.2 -fsSL --max-time 20 https://lenderlens.net/ -o homepage.html
+          grep -Fq '/funnel-audit.html' homepage.html
+          grep -Fq '/decision-lab.html' homepage.html
+          echo "Homepage links verified."
+      - name: Confirm HTTP redirects to HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="$(curl -LsS --max-time 25 -o /dev/null -w '%{url_effective}' http://lenderlens.net/)"
+          case "$url" in
+            https://lenderlens.net/*) echo "HTTP redirects to HTTPS: $url";;
+            *) echo "::error::Unexpected HTTP redirect destination: $url"; exit 1;;
+          esac
