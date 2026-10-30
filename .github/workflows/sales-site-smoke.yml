@@ -24,7 +24,7 @@ jobs:
           for attempt in $(seq 1 12); do
             if curl --proto '=https' --tlsv1.2 -fsSL --max-time 15 --retry 1 https://lenderlens.net/funnel-audit.html -o audit.html &&
                grep -Fq 'Find the leaks between marketing spend and funded loans.' audit.html &&
-               grep -Fq 'https://buy.stripe.com/cNi7sL6rH57L21Je5OaVa04' audit.html; then
+               grep -Fq 'https://buy.stripe.com/14A4gz2etaPOgijapGeUU00' audit.html; then
               echo "Audit page verified over HTTPS."
               break
             fi
