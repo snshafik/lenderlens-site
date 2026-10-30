@@ -15,7 +15,7 @@ _Updated October 29, 2026. Dedicated LenderLens live checkout now verified; no c
 | Starter Analytics | `prod_VXBlB39WAMfNXX` | — | $1,250/mo planned | Product exists; API price creation blocked by safety checks |
 | Growth Analytics | `prod_VXBlv0Ja9eZLYm` | `price_1UW7O1DE8Z6DKZCUcQjGLv0b` | $2,500/mo | Recurring monthly price verified |
 | Executive Analytics | `prod_VXBlw8xqf0en2A` | `price_1UW7O3DE8Z6DKZCU9imLFJn0` | $5,000/mo | Recurring monthly price verified |
-| Mortgage Funnel Leak Audit | *inline-created product; ID not yet verified* | `price_1UW7SoDE8Z6DKZCUssrjCz2R` | $495 once | Live, active dedicated LenderLens Payment Link verified |
+| Mortgage Funnel Leak Audit | `prod_VXBqkAWiIgE7pP` | `price_1UW7SoDE8Z6DKZCUssrjCz2R` | $495 once | Product and price verified from the live Payment Link line item; active |
 
 Sandbox Starter, Growth and Executive products and monthly prices were also created. A sandbox audit Payment Link was successfully created after setting `managed_payments[enabled]=false` for the link; no production sandbox payment is a sale.
 
