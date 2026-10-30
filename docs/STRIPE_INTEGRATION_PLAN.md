@@ -1,56 +1,52 @@
 # LenderLens Stripe implementation plan
-_Last reviewed October 29, 2026. Status: planning completed; dedicated LenderLens Stripe account connection and product provisioning pending._
+_Updated October 29, 2026. Dedicated LenderLens live and sandbox Stripe accounts now connected; partial live catalog provisioned._
 
-## Merchant account isolation
-Use the dedicated Stripe merchant named **lenderlens** shown in the owner's Dashboard. Do not provision new LenderLens services into CaptureKite, Atlas.ai, or Data Desk AI accounts. The LenderLens account must be explicitly authorized in the ChatGPT Stripe connection before Stripe API changes. Verify legal business details, support email, merchant statement descriptor, payout bank setup, and payment acceptance eligibility in Stripe Dashboard. No API secrets belong in GitHub or frontend code.
+## Accounts and payment isolation
+- LenderLens **live**: `acct_1UW7EWDE8Z6DKZCU`.
+- LenderLens **sandbox**: `acct_1UW7EdDcY3FKg0lw`.
+- CaptureKite **live**: `acct_1UDzTDDp32e4frG4`. This is a different business account.
+- Use the LenderLens live merchant for all new LenderLens billing and client records. Do not create new LenderLens subscriptions or invoices in CaptureKite.
+- Existing one-time $495 checkout on site **still uses CaptureKite**: `https://buy.stripe.com/cNi7sL6rH57L21Je5OaVa04`. Maintain accurate merchant disclosure until a verified LenderLens replacement link exists.
 
-**Existing checkout:** The one-time $495 pilot currently links to a live **CaptureKite** Stripe Payment Link. Maintain honest on-site processor disclosure until a new LenderLens payment link has been created, verified and deployed; then change both CTAs, disclose the new payment merchant, and retire the old CaptureKite link only after verifying no unfulfilled orders depend on it. Do not switch blindly.
+## Current live Stripe objects
 
-## Service catalog
-Separate Stripe Products for each customer-facing service; Prices are independent objects. Amounts are in USD.
+| Product | Product ID | Price ID | Amount | Status |
+| --- | --- | --- | --- | --- |
+| Starter Analytics | `prod_VXBlB39WAMfNXX` | — | $1,250/mo planned | Product exists; API price creation blocked by safety checks |
+| Growth Analytics | `prod_VXBlv0Ja9eZLYm` | `price_1UW7O1DE8Z6DKZCUcQjGLv0b` | $2,500/mo | Recurring monthly price verified |
+| Executive Analytics | `prod_VXBlw8xqf0en2A` | `price_1UW7O3DE8Z6DKZCU9imLFJn0` | $5,000/mo | Recurring monthly price verified |
+| Mortgage Funnel Leak Audit | — | — | $495 once planned | API product creation blocked; existing CaptureKite link remains until replacement |
 
-| Product | Price model | Amount | Sales policy |
-| --- | --- | ---: | --- |
-| LenderLens Mortgage Funnel Leak Audit | One-time | $495 | Payment Link; up to 90 days aggregate data, 3 channels, one business unit; written scope & data-readiness confirmation |
-| LenderLens Starter | Monthly flat-rate | $1,250 per month | Scope and service agreement accepted before first charge |
-| LenderLens Growth | Monthly flat-rate | $2,500 per month | Scope and service agreement accepted before first charge |
-| LenderLens Executive | Monthly flat-rate | $5,000 per month | Scope and service agreement accepted before first charge |
+Sandbox Starter, Growth and Executive products and monthly prices were also created. The sandbox Mortgage Funnel Leak Audit product creation was blocked.
 
-Do not treat these prices as tax-inclusive promises; tax obligations and registrations must be reviewed first. Scope changes, onboarding fees, and annual pricing require explicit agreement; avoid silently adding recurring items.
+## Customer billing portal — ACTIVE, LenderLens live account
+- Portal configuration: `bpc_1UW7OgDE8Z6DKZCUIlcxJu7f`
+- Login URL: https://billing.stripe.com/p/login/14A4gz2etaPOgijapGeUU00
+- Features: invoice history; update payment method, email and address; cancellation at end of the paid billing period, with cancellation reasons.
+- Plan upgrades and downgrades intentionally disabled. This is a sales-led scoped consulting business, not automatic commodity SaaS.
+- Public site homepage and pilot page footer link to the LenderLens Customer Billing Portal.
+- No customers, paid invoices or recurring subscriptions were found in the new account on first check.
 
-## Checkout and invoicing choices
-- **Pilot:** Stripe-hosted Payment Link on the dedicated LenderLens account. Require customer/business name, email, and billing details. Link from `/funnel-audit.html` and avoid collecting borrower data or card numbers on lenderlens.net.
-- **Signed monthly services:** Stripe Billing flat-fee Products and recurring Prices; for sales-led deals, prefer a quote/approved scope and an invoice or customer-approved subscription. Avoid unqualified self-serve recurring purchases until onboarding scope is documented.
-- **Custom work:** Stripe Invoicing with Hosted Invoice Page, due date and payment terms per accepted proposal; support card and eligible bank transfer/ACH methods available to the merchant. A final invoice is never proof of payment.
-- **Customer Portal:** Stripe-hosted subscription management for permitted payment method updates, cancellation, and receipt retrieval, with policies consistent with contract terms.
-- **Payment recovery:** enable Stripe Smart Retries and customer notifications for failed recurring payments.
+## Commercial offer and fulfillment rules
+- **Audit:** Fixed-scope $495 one-time consulting project, up to 90 days of aggregate data, three channels and one business unit; findings PDF and 30-minute review. Confirm project fit, client permission and data availability. No borrower PII.
+- **Monthly service:** Starter $1,250, Growth $2,500, Executive $5,000 monthly. Scope, delivery SLAs, term, and cancellation policy must be agreed in writing. Product and price creation does not start a subscription or charge a customer.
+- **Custom invoice:** Use Stripe Invoicing with a Hosted Invoice Page after client agreement. Card and bank methods depend on the merchant's settings. Draft/sent invoices are not paid revenue.
 
-## Operational safeguards
-1. Use Stripe's connected app tools, not a personal secret key shared in a chat. For any future server integration, prefer restricted API keys in a server-side secrets vault.
-2. No raw `sk_live_`, `sk_test_`, `rk_live_`, or webhook signing secrets in GitHub, static Pages, HTML, JavaScript, or screenshots.
-3. Keep dynamic payment methods enabled by omitting explicit `payment_method_types`.
-4. For **automated onboarding, fulfillment or recurring billing integration**, implement a server-side webhook endpoint with signature validation. At minimum process `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.paid`, `invoice.payment_failed`, `charge.refunded`, `charge.dispute.created`, and `radar.early_fraud_warning.created` as applicable. All processing must be idempotent. GitHub Pages cannot host a secret-bearing webhook endpoint. Stripe-hosted invoicing and Dashboard monitoring can be used for human-operated fulfillment before any automatic systems exist.
-5. Separate confirmed LenderLens paid orders from test mode, CaptureKite orders, unpaid invoices, spam leads and refunds. Confirm payment success in Stripe before treating a purchase as revenue or starting client access.
-6. Do not enable `automatic_tax` until tax nexus, product treatment, and Stripe Tax registrations are confirmed. Review US state sales/use taxes for professional analytics services and subscription invoicing.
-7. Use Dashboard for branding, statement descriptor, customer support, refund policy, tax/legal address and payout onboarding. Do not expose sensitive onboarding details to the website.
-8. Perform a test-mode checkout in the new LenderLens account, verify names/amounts/confirmation, then enable its corresponding live prices and links.
+## Next steps (do not falsely mark done)
+1. Verify LenderLens merchant KYC, payment acceptance, payouts, statement descriptor, branding/support details, tax obligations and invoice legal footer directly in Stripe Dashboard.
+2. Through the merchant Dashboard or an approved API operation, create the $495 audit product, price and hosted Payment Link in the **LenderLens** account. API-based creation has been blocked by safety checks; do not reattempt blindly.
+3. Create the Starter $1,250/mo recurring price in the LenderLens live account; API operation was blocked. Avoid duplicating Growth/Executive prices.
+4. Verify the new LenderLens audit link is active, has a $495 one-time line item, carries merchant business name, collects business contact details and leads to a clear onboarding confirmation.
+5. Replace **both existing CaptureKite link occurrences** on `/funnel-audit.html`, change merchant disclosure, confirm new public deployment and successful website smoke test. Preserve CaptureKite link until old orders are reviewed.
+6. Configure Stripe invoicing defaults and payment terms after account holder confirms legal/operating details; don't send invoices without genuine customer and accepted proposal.
+7. Implement signed, idempotent server-side webhooks before automated fulfillment, subscriptions, and asynchronous payment handling. GitHub Pages is static; no secret-bearing backend or webhook handler can run there. Relevant events include checkout completions/success/failure; `customer.subscription.*`, `invoice.paid`, `invoice.payment_failed`, disputes, refunds and early fraud warnings.
+8. Confirm any applicable Stripe Tax registrations before enabling `automatic_tax`. No auto tax was enabled.
+9. Verify first sale from an authentic succeeded externally paid LenderLens checkout or paid invoice, excluding all tests, spam, and non-LenderLens account transactions.
 
-## Deployment checklist
-- [x] GitHub Pages site and custom domain HTTPS established
-- [x] Scoped $495 audit page and illustrative sample published
-- [x] Stripe-hosted $495 Payment Link available **via CaptureKite** (temporary)
-- [x] New LenderLens Stripe architecture documented
-- [ ] Authorize **lenderlens** Stripe merchant in ChatGPT Stripe connection
-- [ ] Verify merchant business readiness and branding in Dashboard
-- [ ] Create new LenderLens-branded $495 audit Product / one-time Price / Payment Link
-- [ ] Create 3 separate monthly flat-fee Products and Prices in dedicated account
-- [ ] Configure hosted invoicing templates, payment terms, dunning and portal
-- [ ] Verify dedicated checkout non-charging in test mode and live product/link configuration
-- [ ] Update public website to point to dedicated LenderLens Stripe checkout and verify website smoke test
-- [ ] Implement signed webhooks before claiming fully automated lifecycle fulfillment
-- [ ] Start sales outreach only with authorized business mailbox and compliant contact practices
+## Security
+Never paste or commit Stripe secret keys or webhook signing secrets. The publishable `pk_test_` key shown in chat is not a secret and is not needed for hosted Payment Links. If a future backend is needed, use a restricted key in a secrets manager, never GitHub Pages or plain frontend JavaScript. Use dynamic payment methods; avoid specifying payment_method_types unless Terminal.
 
-## References
+## Stripe references
 - https://docs.stripe.com/payment-links
 - https://docs.stripe.com/billing/subscriptions/design-an-integration
 - https://docs.stripe.com/invoicing/dashboard
