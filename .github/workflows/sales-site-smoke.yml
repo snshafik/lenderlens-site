@@ -23,13 +23,20 @@ jobs:
           # Allow GitHub Pages publishing time after a push without ignoring failure.
           for attempt in $(seq 1 12); do
             if curl --proto '=https' --tlsv1.2 -fsSL --max-time 15 --retry 1 https://lenderlens.net/funnel-audit.html -o audit.html &&
-               grep -Fq 'LenderLens — Mortgage Funnel Leak Audit' audit.html &&
+               grep -Fq 'Find the leaks between marketing spend and funded loans.' audit.html &&
                grep -Fq 'https://buy.stripe.com/cNi7sL6rH57L21Je5OaVa04' audit.html; then
               echo "Audit page verified over HTTPS."
               break
             fi
             if [ "$attempt" -eq 12 ]; then
               echo "::error::Sales page or checkout link not publicly available after retries"
+              echo "HTTP response diagnostics:"
+              curl --proto '=https' --tlsv1.2 -sSL -o /tmp/final.html -w 'http=%{http_code} url=%{url_effective} bytes=%{size_download}\n' --max-time 20 https://lenderlens.net/funnel-audit.html || true
+              if [ -f /tmp/final.html ]; then
+                grep -E -o '<title>[^<]+' /tmp/final.html | head -1 || true
+                grep -F 'buy.stripe.com' /tmp/final.html | head -1 || true
+              fi
+              echo "DNS A: $(getent ahostsv4 lenderlens.net | head -1 || true)"
               exit 1
             fi
             sleep 10
